@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QTROPWINNERS – Live Code Typing</title>
+<style>
+  body {
+    margin: 0;
+    background: #0d0d0d;
+    font-family: monospace;
+    color: #00ff9c;
+    overflow: hidden;
+  }
+
+  .code-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden;
+    background: #0d0d0d;
+    padding: 20px;
+  }
+
+  .code-content {
+    white-space: pre;
+    line-height: 1.3;
+  }
+
+  .overlay-text {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 2rem;
+    text-shadow: 0 0 5px #00ff9c;
+    z-index: 2;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div class="code-container">
+  <div class="code-content" id="code"></div>
+  <div class="overlay-text">
+    WELCOME TO QTROP WINNERS HUB<br>HOME OF MATCHES
+  </div>
+</div>
+
+<script>
+const codeLines = [
+"/* QTROPWINNERS – Automated Trading System */",
+"const QTROPWINNERS = {",
+"  bots: ['AUDI','GLE','SUBARU','V8'],",
+"  status: 'active',",
+"  balance: 0",
+"};",
+"",
+"async function initQTROPWINNERS() {",
+"  console.log('Initializing QTROPWINNERS platform...');",
+"  for (const bot of QTROPWINNERS.bots) {",
+"    await startBot(bot);",
+"  }",
+"  await updateBalance();",
+"}",
+"",
+"async function startBot(botName) {",
+"  console.log(`Starting ${botName} bot on QTROPWINNERS...`);",
+"}",
+"",
+"async function updateBalance() {",
+"  const res = await fetch('/api/qtwinners/balance');",
+"  const json = await res.json();",
+"  QTROPWINNERS.balance = json.balance;",
+"  console.log('QTROPWINNERS balance:', QTROPWINNERS.balance);",
+"}",
+"",
+"initQTROPWINNERS();",
+"/* end of QTROPWINNERS code */"
+];
+
+let lineIndex = 0;
+const codeDiv = document.getElementById('code');
+
+function typeLine() {
+  if (lineIndex < codeLines.length) {
+    codeDiv.innerHTML += codeLines[lineIndex] + "\n";
+    lineIndex++;
+    codeDiv.scrollTop = codeDiv.scrollHeight; // scroll down as new lines appear
+    setTimeout(typeLine, 150); // typing speed
+  } else {
+    // reset after finishing all lines
+    setTimeout(() => {
+      codeDiv.innerHTML = "";
+      lineIndex = 0;
+      typeLine();
+    }, 1000); // wait 1 second before restarting
+  }
+}
+
+typeLine();
+</script>
+</body>
+</html>
